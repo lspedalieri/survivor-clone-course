@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const MAX_SPEED = 75
+const MAX_SPEED = 40
 
 var player_nodes := []
 var direction = Vector2.ZERO

@@ -1,5 +1,7 @@
 extends Camera2D
 
+@export var camera_offset:int = 20
+
 var player 
 var player_nodes := []
 var target_position = Vector2.ZERO
@@ -12,7 +14,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	acquire_target()
-	global_position = global_position.lerp(target_position, 1.0 - exp(-delta * 10))
+	global_position = global_position.lerp(target_position, 1.0 - exp(-delta * camera_offset))
 	
 func acquire_target():
 	player_nodes = get_tree().get_nodes_in_group("player")
