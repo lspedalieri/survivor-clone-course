@@ -7,7 +7,7 @@ var direction = Vector2.ZERO
 
 
 func _ready():
-	pass
+	$Area2D.area_entered.connect(on_area_entered)
 
 func _physics_process(delta):
 	direction = get_direction_to_player()
@@ -19,3 +19,7 @@ func get_direction_to_player():
 	if player_nodes != null:
 		return (player_nodes[0].global_position - global_position).normalized()
 	return Vector2.ZERO
+
+
+func on_area_entered(other_area:Area2D):
+	queue_free()
