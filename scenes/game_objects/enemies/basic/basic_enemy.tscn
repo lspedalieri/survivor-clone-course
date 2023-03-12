@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://cclcpf3a6eukb"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/enemies/basic/basic_enemy.gd" id="1_xmucb"]
+[ext_resource type="PackedScene" uid="uid://b7apsmto52ncp" path="res://scenes/components/health_component.tscn" id="2_d4dpn"]
+[ext_resource type="Texture2D" uid="uid://cg76kfddegl3g" path="res://scenes/game_objects/enemies/basic/basic_enemy.png" id="2_xx5vg"]
+[ext_resource type="PackedScene" uid="uid://bbdvkosq07fg" path="res://scenes/components/vial_drop_component.tscn" id="3_uc5xx"]
+[ext_resource type="PackedScene" uid="uid://dr1vesch4rjn0" path="res://scenes/game_objects/experience_vial/experience_vial.tscn" id="4_j5xwy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vsq8r"]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7agsq"]
+radius = 5.0
+
+[node name="BasicEnemy" type="CharacterBody2D" groups=["enemy"]]
+position = Vector2(0, -4)
+collision_layer = 8
+collision_mask = 9
+motion_mode = 1
+script = ExtResource("1_xmucb")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_d4dpn")]
+
+[node name="VialDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_uc5xx")]
+vial_scene = ExtResource("4_j5xwy")
+health_component = NodePath("../HealthComponent")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_vsq8r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xx5vg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_7agsq")
